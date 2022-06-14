@@ -56,12 +56,13 @@ export const TableBox = styled.div`
       justify-content: space-evenly;
       align-items: center;
 
-      min-width: 100px;
+      min-width: 60px;
 
       button {
         margin: 0 3px;
-        width: 50px;
+        width: 25px;
         height: 25px;
+        border-radius: 20px;
       }
     }
   }

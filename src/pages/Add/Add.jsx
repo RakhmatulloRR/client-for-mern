@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../generic/Button";
@@ -27,7 +26,7 @@ export default function AddUser() {
             name="lastname"
             placeholder="Your last name.."
           />
-          <label htmlFor="dob">Age</label>
+          <label htmlFor="dob">Date of birth</label>
           <input
             type="date"
             id="dob"
@@ -41,8 +40,10 @@ export default function AddUser() {
             name="email"
             placeholder="Your email.."
           />
+
           <label htmlFor="job">Job</label>
           <input type="text" id="job" name="job" placeholder="Your job.." />
+
           <label htmlFor="country">Country</label>
           <select id="country" name="country">
             {COUNTRIES.map((country, i) => {
@@ -56,35 +57,13 @@ export default function AddUser() {
         </div>
         <div>
           <Link to="/">
-            <Button onClick={createCustomer}>submit</Button>
+            <Button but="submit">submit</Button>
           </Link>
           <Link to="/">
-            <Button>cancel</Button>
+            <Button but="cancel">cancel</Button>
           </Link>
         </div>
       </div>
     </AddUserBox>
   );
-
-  function createCustomer() {
-    const inputs = document.querySelectorAll("input");
-    const select = document.querySelector("select");
-    const newCustomer = {
-      first_name: inputs[0].value,
-      last_name: inputs[1].value,
-      date_of_birth: format(new Date(inputs[2].value), "dd/MM/yyyy"),
-      email: inputs[3].value,
-      job: inputs[4].value,
-      country: select.value,
-    };
-    fetch("http://localhost:5000/api/customers", {
-      method: "POST",
-      body: JSON.stringify(newCustomer),
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    })
-  }
 }

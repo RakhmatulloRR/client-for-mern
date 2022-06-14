@@ -1,41 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "../generic/Button";
-import { HeadingBox } from "./HeadingStyle";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '../generic/Button';
+import { Add, Container, Filter, SignIn } from './HeadingStyle';
 
-export default function Heading(props) {
-
-  const onSearch = (e) => {props.func.setFilterText(e.target.value)}
- 
+export default function Heading({ users, setCount, count }) {
   return (
     <>
-      <HeadingBox>
-        <div>
-          <h1 className="Brand">CRUDapp</h1>
+      <Container>
+        <SignIn>
+          <h1 className='Brand'>CRUDapp</h1>
 
-          <Link to="/Add">
-            <Button>add</Button>
+          <Link to='/Add'>
+            <Button but='signin'>Sign In</Button>
           </Link>
-        </div>
-        <div>
+        </SignIn>
+        <Add>
+          <div className='counter'>
+            <button onClick={() => setCount(count - 1)}>➖</button>
+            <button>{count}</button>
+            <button onClick={() => setCount(count + 1)}>➕</button>
+            <input defaultValue={' => Counter For Checking Memo'} disabled />
+          </div>
+          <Link to={'/Add'}>
+            <Button>Add</Button>
+          </Link>
+        </Add>
+        <Filter>
           <label>Async Search:</label>
-          <input onChange={onSearch} type="text" placeholder="search..." />
-          <select onChange={(e)=> props.func.setKey(e.target.value)}>
-            <option value="first_name" key="1">
+          <input type='text' placeholder='search...' />
+          <select>
+            <option value='first_name' key='1'>
               firstname
             </option>
-            <option value="last_name" key="2">
+            <option value='last_name' key='2'>
               lastname
             </option>
-            <option value="date_of_birth" key="3">
+            <option value='date_of_birth' key='3'>
               date of birth
             </option>
-            <option value="email" key="4">
+            <option value='email' key='4'>
               email
             </option>
           </select>
-        </div>
-      </HeadingBox>
+        </Filter>
+      </Container>
     </>
   );
 }
